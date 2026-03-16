@@ -8,12 +8,14 @@
     :root {
       --cor-primaria: #6c5ce7;
       --cor-secundaria: #a29bfe;
+      --acerto: #00b894;
+      --erro: #e74c3c;
       --texto: #2d3436;
       --fundo: #f5f6fa;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       background: var(--fundo);
       color: var(--texto);
       line-height: 1.6;
@@ -22,12 +24,13 @@
       background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
       color: white;
       text-align: center;
-      padding: 4rem 1rem;
+      padding: 5rem 1rem 4rem;
     }
-    header h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+    header h1 { font-size: 3.2rem; margin-bottom: 0.6rem; }
+    header p { font-size: 1.3rem; max-width: 700px; margin: 0 auto; opacity: 0.95; }
     nav {
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -36,47 +39,75 @@
       list-style: none;
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
+      gap: 2.5rem;
+      padding: 1.2rem;
     }
     nav a {
       text-decoration: none;
       color: var(--cor-primaria);
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1.1rem;
     }
     section {
       max-width: 1100px;
-      margin: 3rem auto;
+      margin: 3.5rem auto;
       padding: 0 1.5rem;
     }
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      margin: 1.5rem 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 2.2rem;
+      margin: 2rem 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.09);
     }
+    h2 { color: var(--cor-primaria); margin-bottom: 1.2rem; }
     .quiz {
       text-align: center;
+    }
+    .pergunta {
+      font-size: 1.4rem;
+      margin: 2rem 0 1.5rem;
+      font-weight: 500;
+    }
+    .opcoes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 1.5rem 0;
     }
     button {
       background: var(--cor-primaria);
       color: white;
       border: none;
-      padding: 0.9rem 2rem;
+      padding: 1rem 2.2rem;
       border-radius: 50px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       cursor: pointer;
-      margin: 0.8rem;
-      transition: 0.3s;
+      transition: all 0.25s;
+      min-width: 140px;
     }
-    button:hover { transform: scale(1.06); }
+    button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(108,92,231,0.3); }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    #resultado-final {
+      font-size: 1.8rem;
+      margin: 2rem 0;
+      font-weight: bold;
+      min-height: 60px;
+    }
+    .acerto { color: var(--acerto); }
+    .erro   { color: var(--erro); }
     footer {
       background: var(--cor-primaria);
       color: white;
       text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
+      padding: 2.5rem;
+      margin-top: 4rem;
     }
   </style>
 </head>
@@ -84,52 +115,63 @@
 
 <header>
   <h1>Matemática Legal</h1>
-  <p>Aprenda brincando e tire suas dúvidas em minutos!</p>
+  <p>Um lugar divertido para praticar e entender matemática do ensino fundamental de forma leve e sem pressão!</p>
 </header>
 
 <nav>
   <ul>
     <li><a href="#inicio">Início</a></li>
-    <li><a href="#conteudo">Conteúdo</a></li>
-    <li><a href="#quiz">Teste Rápido</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#quiz">Quiz Rápido</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
 </nav>
 
 <section id="inicio">
   <div class="card">
-    <h2>Bem-vindo!</h2>
-    <p>Esse site foi feito para ajudar alunos do ensino fundamental a entenderem matemática de forma divertida.</p>
+    <h2>Bem-vindo ao Matemática Legal! 🚀</h2>
+    <p>Aqui você encontra explicações simples, truques rápidos e muitos exercícios para treinar.</p>
+    <p>O objetivo é fazer você <strong>gostar</strong> de matemática e perder o medo dos números.</p>
   </div>
 </section>
 
-<section id="conteudo">
+<section id="sobre">
   <div class="card">
-    <h2>Conteúdo da semana</h2>
-    <ul>
-      <li>→ Frações de uma forma simples</li>
-      <li>→ Tabuada ninja (técnicas rápidas)</li>
-      <li>→ Geometria básica: formas e ângulos</li>
+    <h2>Sobre o projeto</h2>
+    <p>Feito especialmente para alunos do 5º ao 9º ano que querem revisar ou aprender de um jeito diferente.</p>
+    <p>Temas que já estão no radar:</p>
+    <ul style="padding-left: 1.8rem; margin: 1rem 0;">
+      <li>Frações e números decimais</li>
+      <li>Tabuada avançada e cálculos mentais</li>
+      <li>Geometria (áreas, perímetros, ângulos)</li>
+      <li>Porcentagem e regra de três</li>
+      <li>Expressões numéricas e equações simples</li>
     </ul>
+    <p>Em breve teremos mais aulas, vídeos curtos e desafios semanais!</p>
   </div>
 </section>
 
 <section id="quiz" class="quiz">
   <div class="card">
     <h2>Quiz Rápido – Nível 1</h2>
-    <p>Quanto é 8 × 7?</p>
-    <button onclick="verificarResposta('errado')">48</button>
-    <button onclick="verificarResposta('correto')">56</button>
-    <button onclick="verificarResposta('errado')">64</button>
-    <p id="resultado" style="font-size:1.4rem; margin-top:1.5rem; font-weight:bold;"></p>
+    <p style="margin-bottom: 2rem;">Responda às 5 perguntas abaixo. Boa sorte! 🎯</p>
+
+    <div id="pergunta-container">
+      <div class="pergunta" id="pergunta-texto"></div>
+      <div class="opcoes" id="opcoes"></div>
+    </div>
+
+    <div id="resultado-final"></div>
+    <button id="btn-reiniciar" style="display:none;" onclick="reiniciarQuiz()">Tentar novamente</button>
   </div>
 </section>
 
 <section id="contato">
   <div class="card">
-    <h2>Fale comigo</h2>
-    <p>Quer sugerir um tema ou tirar dúvida? Manda mensagem!</p>
-    <p>📧 lucas.exemplo@email.com</p>
+    <h2>Fale com a gente</h2>
+    <p>Quer sugerir um tema? Encontrou algum erro? Tem uma dúvida específica?</p>
+    <p>É só mandar um e-mail ou mensagem:</p>
+    <p style="font-size: 1.3rem; margin: 1.5rem 0;">📧 matematica.legal.brasil@gmail.com</p>
   </div>
 </section>
 
@@ -138,16 +180,112 @@
 </footer>
 
 <script>
-  function verificarResposta(tipo) {
-    const resultado = document.getElementById('resultado');
-    if (tipo === 'correto') {
-      resultado.style.color = 'green';
-      resultado.textContent = '✅ Acertou! Parabéns!';
-    } else {
-      resultado.style.color = 'red';
-      resultado.textContent = '❌ Ops... tenta de novo!';
+  const perguntas = [
+    {
+      pergunta: "Quanto é 8 × 7?",
+      opcoes: ["48", "56", "64", "72"],
+      correta: 1  // índice da opção correta (começa em 0)
+    },
+    {
+      pergunta: "Qual é o resultado de 120 ÷ 15?",
+      opcoes: ["6", "8", "9", "10"],
+      correta: 1
+    },
+    {
+      pergunta: "Quanto é 25% de 200?",
+      opcoes: ["40", "50", "60", "75"],
+      correta: 1
+    },
+    {
+      pergunta: "Qual é o perímetro de um quadrado com lado 9 cm?",
+      opcoes: ["18 cm", "27 cm", "36 cm", "81 cm"],
+      correta: 2
+    },
+    {
+      pergunta: "Se 3 lápis custam R$ 12, quanto custam 7 lápis?",
+      opcoes: ["R$ 24", "R$ 28", "R$ 30", "R$ 36"],
+      correta: 1
     }
+  ];
+
+  let indiceAtual = 0;
+  let acertos = 0;
+
+  const perguntaTexto = document.getElementById("pergunta-texto");
+  const opcoesDiv = document.getElementById("opcoes");
+  const resultadoFinal = document.getElementById("resultado-final");
+  const btnReiniciar = document.getElementById("btn-reiniciar");
+
+  function carregarPergunta() {
+    if (indiceAtual >= perguntas.length) {
+      mostrarResultadoFinal();
+      return;
+    }
+
+    const p = perguntas[indiceAtual];
+    perguntaTexto.textContent = `${indiceAtual + 1}/5 - ${p.pergunta}`;
+    opcoesDiv.innerHTML = "";
+
+    p.opcoes.forEach((op, idx) => {
+      const btn = document.createElement("button");
+      btn.textContent = op;
+      btn.onclick = () => verificarResposta(idx);
+      opcoesDiv.appendChild(btn);
+    });
   }
+
+  function verificarResposta(escolhida) {
+    const p = perguntas[indiceAtual];
+    const botoes = opcoesDiv.querySelectorAll("button");
+
+    botoes.forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === p.correta) btn.style.background = "var(--acerto)";
+      if (i === escolhida && i !== p.correta) btn.style.background = "var(--erro)";
+    });
+
+    if (escolhida === p.correta) acertos++;
+
+    setTimeout(() => {
+      indiceAtual++;
+      carregarPergunta();
+    }, 1200);
+  }
+
+  function mostrarResultadoFinal() {
+    perguntaTexto.style.display = "none";
+    opcoesDiv.style.display = "none";
+
+    let mensagem = "";
+    let cor = "";
+
+    if (acertos === 5) {
+      mensagem = "Perfeito! 5/5 🎉 Você arrasou!";
+      cor = "var(--acerto)";
+    } else if (acertos >= 3) {
+      mensagem = `Muito bom! ${acertos}/5 😊`;
+      cor = "var(--acerto)";
+    } else {
+      mensagem = `Você fez ${acertos}/5. Continue treinando! 💪`;
+      cor = "var(--erro)";
+    }
+
+    resultadoFinal.innerHTML = `<span style="color:${cor}">${mensagem}</span>`;
+    btnReiniciar.style.display = "inline-block";
+  }
+
+  function reiniciarQuiz() {
+    indiceAtual = 0;
+    acertos = 0;
+    perguntaTexto.style.display = "block";
+    opcoesDiv.style.display = "flex";
+    resultadoFinal.innerHTML = "";
+    btnReiniciar.style.display = "none";
+    carregarPergunta();
+  }
+
+  // Inicia o quiz
+  carregarPergunta();
 </script>
 
 </body>
