@@ -11,103 +11,109 @@
       --acerto: #00b894;
       --erro: #e74c3c;
       --texto: #2d3436;
-      --fundo: #f5f6fa;
+      --card-bg: rgba(255, 255, 255, 0.92);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: system-ui, -apple-system, sans-serif;
-      background: var(--fundo);
       color: var(--texto);
       line-height: 1.6;
+      background: url('https://images.unsplash.com/photo-1509228627929-8243eb4676d3?auto=format&fit=crop&q=80&w=2000') 
+                  no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
     }
     header {
-      background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+      background: linear-gradient(135deg, rgba(108,92,231,0.85), rgba(162,155,254,0.85));
       color: white;
       text-align: center;
-      padding: 5rem 1rem 4rem;
+      padding: 5.5rem 1rem 4.5rem;
+      backdrop-filter: blur(3px);
     }
-    header h1 { font-size: 3.2rem; margin-bottom: 0.6rem; }
-    header p { font-size: 1.3rem; max-width: 700px; margin: 0 auto; opacity: 0.95; }
+    header h1 { font-size: 3.4rem; margin-bottom: 0.7rem; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    header p { font-size: 1.35rem; max-width: 720px; margin: 0 auto; }
     nav {
-      background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
       position: sticky;
       top: 0;
       z-index: 10;
+      backdrop-filter: blur(8px);
     }
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
-      gap: 2.5rem;
-      padding: 1.2rem;
+      gap: 2.8rem;
+      padding: 1.3rem;
     }
     nav a {
       text-decoration: none;
       color: var(--cor-primaria);
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
     section {
       max-width: 1100px;
-      margin: 3.5rem auto;
+      margin: 4rem auto;
       padding: 0 1.5rem;
     }
     .card {
-      background: white;
-      border-radius: 16px;
-      padding: 2.2rem;
-      margin: 2rem 0;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 2.4rem;
+      margin: 2.2rem 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      backdrop-filter: blur(6px);
     }
-    h2 { color: var(--cor-primaria); margin-bottom: 1.2rem; }
+    h2 { color: var(--cor-primaria); margin-bottom: 1.3rem; }
     .quiz {
       text-align: center;
     }
     .pergunta {
-      font-size: 1.4rem;
-      margin: 2rem 0 1.5rem;
+      font-size: 1.45rem;
+      margin: 2.2rem 0 1.8rem;
       font-weight: 500;
     }
     .opcoes {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.2rem;
-      margin: 1.5rem 0;
+      gap: 1.4rem;
+      margin: 1.8rem 0;
     }
     button {
       background: var(--cor-primaria);
       color: white;
       border: none;
-      padding: 1rem 2.2rem;
+      padding: 1.1rem 2.4rem;
       border-radius: 50px;
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       cursor: pointer;
-      transition: all 0.25s;
-      min-width: 140px;
+      transition: all 0.3s;
+      min-width: 150px;
     }
-    button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(108,92,231,0.3); }
+    button:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(108,92,231,0.35); }
     button:disabled {
-      opacity: 0.6;
+      opacity: 0.65;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
     }
     #resultado-final {
-      font-size: 1.8rem;
-      margin: 2rem 0;
+      font-size: 1.9rem;
+      margin: 2.5rem 0;
       font-weight: bold;
-      min-height: 60px;
+      min-height: 70px;
     }
     .acerto { color: var(--acerto); }
     .erro   { color: var(--erro); }
     footer {
-      background: var(--cor-primaria);
+      background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
       color: white;
       text-align: center;
-      padding: 2.5rem;
-      margin-top: 4rem;
+      padding: 2.8rem;
+      margin-top: 5rem;
     }
   </style>
 </head>
@@ -154,7 +160,7 @@
 <section id="quiz" class="quiz">
   <div class="card">
     <h2>Quiz Rápido – Nível 1</h2>
-    <p style="margin-bottom: 2rem;">Responda às 5 perguntas abaixo. Boa sorte! 🎯</p>
+    <p style="margin-bottom: 2.2rem;">Responda às 10 perguntas abaixo. Boa sorte! 🎯</p>
 
     <div id="pergunta-container">
       <div class="pergunta" id="pergunta-texto"></div>
@@ -181,31 +187,16 @@
 
 <script>
   const perguntas = [
-    {
-      pergunta: "Quanto é 8 × 7?",
-      opcoes: ["48", "56", "64", "72"],
-      correta: 1  // índice da opção correta (começa em 0)
-    },
-    {
-      pergunta: "Qual é o resultado de 120 ÷ 15?",
-      opcoes: ["6", "8", "9", "10"],
-      correta: 1
-    },
-    {
-      pergunta: "Quanto é 25% de 200?",
-      opcoes: ["40", "50", "60", "75"],
-      correta: 1
-    },
-    {
-      pergunta: "Qual é o perímetro de um quadrado com lado 9 cm?",
-      opcoes: ["18 cm", "27 cm", "36 cm", "81 cm"],
-      correta: 2
-    },
-    {
-      pergunta: "Se 3 lápis custam R$ 12, quanto custam 7 lápis?",
-      opcoes: ["R$ 24", "R$ 28", "R$ 30", "R$ 36"],
-      correta: 1
-    }
+    { pergunta: "Quanto é 8 × 7?", opcoes: ["48", "56", "64", "72"], correta: 1 },
+    { pergunta: "Qual é o resultado de 120 ÷ 15?", opcoes: ["6", "8", "9", "10"], correta: 1 },
+    { pergunta: "Quanto é 25% de 200?", opcoes: ["40", "50", "60", "75"], correta: 1 },
+    { pergunta: "Qual é o perímetro de um quadrado com lado 9 cm?", opcoes: ["18 cm", "27 cm", "36 cm", "81 cm"], correta: 2 },
+    { pergunta: "Se 3 lápis custam R$ 12, quanto custam 7 lápis?", opcoes: ["R$ 24", "R$ 28", "R$ 30", "R$ 36"], correta: 1 },
+    { pergunta: "Quanto é 15 + 27 + 8?", opcoes: ["48", "50", "52", "55"], correta: 1 },
+    { pergunta: "Qual fração é maior: 3/4 ou 5/8?", opcoes: ["3/4", "5/8", "são iguais", "nenhuma"], correta: 0 },
+    { pergunta: "Qual é a área de um retângulo de 6 cm por 4 cm?", opcoes: ["10 cm²", "20 cm²", "24 cm²", "28 cm²"], correta: 2 },
+    { pergunta: "20% de 150 é igual a?", opcoes: ["20", "25", "30", "35"], correta: 2 },
+    { pergunta: "Quanto é 9² (9 ao quadrado)?", opcoes: ["72", "81", "90", "99"], correta: 1 }
   ];
 
   let indiceAtual = 0;
@@ -223,7 +214,7 @@
     }
 
     const p = perguntas[indiceAtual];
-    perguntaTexto.textContent = `${indiceAtual + 1}/5 - ${p.pergunta}`;
+    perguntaTexto.textContent = `${indiceAtual + 1}/${perguntas.length} - ${p.pergunta}`;
     opcoesDiv.innerHTML = "";
 
     p.opcoes.forEach((op, idx) => {
@@ -249,7 +240,7 @@
     setTimeout(() => {
       indiceAtual++;
       carregarPergunta();
-    }, 1200);
+    }, 1400);
   }
 
   function mostrarResultadoFinal() {
@@ -259,14 +250,17 @@
     let mensagem = "";
     let cor = "";
 
-    if (acertos === 5) {
-      mensagem = "Perfeito! 5/5 🎉 Você arrasou!";
+    if (acertos === 10) {
+      mensagem = "Perfeito! 10/10 🎉 Você é um gênio da matemática!";
       cor = "var(--acerto)";
-    } else if (acertos >= 3) {
-      mensagem = `Muito bom! ${acertos}/5 😊`;
+    } else if (acertos >= 8) {
+      mensagem = `Excelente! ${acertos}/10 😎`;
+      cor = "var(--acerto)";
+    } else if (acertos >= 6) {
+      mensagem = `Muito bom! ${acertos}/10 😊 Continue assim!`;
       cor = "var(--acerto)";
     } else {
-      mensagem = `Você fez ${acertos}/5. Continue treinando! 💪`;
+      mensagem = `Você fez ${acertos}/10. Vamos treinar mais? 💪`;
       cor = "var(--erro)";
     }
 
